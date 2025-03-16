@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="static/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+</head>
+
+<body>
+    <nav>
+        <div class="menu-toggle"></div>
+        <div class="profile">
+            <div class="user">
+                <h3>{{user ['username']}}</h3>
+                <p>{{user ['email']}}</p>
+            </div>
+            <div class="img-box">
+                <img src="static/images/blank-pro.jpg" alt="some user image">
+            </div>
+        </div>
+        <div class="menu">
+            <ul>
+                <li><a href="/"><i class="ph-bold ph-envelope-simple"></i>&nbsp;Home</a></li>
+                <li><a href="/track"><i class="ph-bold ph-envelope-simple"></i>&nbsp;Track</a></li>
+                <li><a href="/logout"><i class="ph-bold ph-sign-out"></i>&nbsp;Sign Out</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="main">
+        <h2>PROFILE</h2>
+        <div class="card">
+            <div class="card-body">
+                <div class="card-body">
+                    <a href="#" onclick="showPopupForm();return false;" class="edit-button"><i class="fa fa-edit"></i></a>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Username</td>
+                            <td>:</td>
+                            <td>{{user['username']}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>:</td>
+                            <td>{{user ['email']}}</td>
+                        </tr>
+                        <tr>
+                            <td>Gender</td>
+                            <td>:</td>
+                            <td>{{user ['gender']}}</td>
+                        </tr>
+                        <tr>
+                            <td>Age</td>
+                            <td>:</td>
+                            <td>{{user ['age']}}</td>
+                        </tr>
+                        <tr>
+                            <td>Height (cm)</td>
+                            <td>:</td>
+                            <td>{{user ['height']}}</td>
+                        </tr>
+                        <tr>
+                            <td>Weight (kg)</td>
+                            <td>:</td>
+                            <td>{{user ['weight']}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="track-btn">
+        <a href="/track" class="button">Start tracking</a>
+    </div>
+
+    <div id="popup-form" class="popup-form">
+        <div class="popup-form-content">
+            <span class="close-button" onclick="hidePopupForm()">&times;</span>
+            <h2>Enter</h2>
+            <form action="/stat" method="post">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+                <br>
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+                <br>
+                <label for="weight">Weight (kg):</label>
+                <input type="number" id="weight" step="0.01" name="weight" required>
+                <br>
+                <label for="height">Height (cm):</label>
+                <input type="number" id="height" step="0.01" name="height" required>
+                <br>
+                <button type="form">Submit</button>
+            </form>
+        </div>
+
+    <script>
+        let profile = document.querySelector('.profile');
+        let menu = document.querySelector('.menu');
+
+        profile.onclick = function () {
+            menu.classList.toggle('active');
+        }
+
+        function showPopupForm(){
+            var popupForm = document.getElementById('popup-form');
+            popupForm.style.display = 'block';
+        }
+
+        function hidePopupForm() {
+            var popupMessage = document.getElementById("popup-form");
+            popupMessage.style.display = "none";
+          }
+          
+        //Get form and input elements
+    var form = document.querySelector('#popup-form form');
+    var ageInput = document.getElementById('age');
+    var weightInput = document.getElementById('weight');
+    var heightInput = document.getElementById('height');
+
+    // Add event listener to the form's submit button
+    form.addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+    // Validate age
+    if (ageInput.value < 13 || ageInput.value > 99) {
+        alert("Age must be between 13 and 99.");
+        return;
+    }
+
+    // Validate weight
+    if (weightInput.value < 40 || weightInput.value > 300) {
+        alert("Weight must be between 40 and 300 kg.");
+        return;
+    }
+
+    // Validate height
+    if (heightInput.value < 100 || heightInput.value > 250) {
+        alert("Height must be between 100 and 250 cm.");
+        return;
+    }
+
+    // If all validations pass, submit the form
+    form.submit();
+});  
+    </script>
+</body>
+
+</html>

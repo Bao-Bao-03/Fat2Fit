@@ -1,0 +1,139 @@
+.navbar {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.4;
+  z-index: -1;
+  background: linear-gradient(to right, #1e5799 0%, #3ccdbb 0%, #16c9f6 100%);
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.nav-logo {
+  color: #fff;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 20px;
+  display: block;
+}
+
+.nav-links li a:hover {
+  background-color: transparent;
+}
+
+/* Forgot Password form styles */
+body {
+  font-family: "Nunito", Arial, sans-serif;
+  background-color: #f0f0f0;
+  background: linear-gradient(rgba(0, 168, 255, 0.3), rgba(0, 168, 255, 0.3)),
+    url("images/a.jpg");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  margin-top: 0;
+  margin-bottom: auto;
+  padding-top: 60px;
+  font-weight: bold;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.forgot-password-form {
+  background-color: transparent;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 360px;
+  text-align: center;
+  height: auto;
+  backdrop-filter: blur(20px);
+  border: 2px solid white;
+}
+
+.forgot-password-form h2 {
+  margin-bottom: 15px;
+  color: white;
+  font-weight: bold;
+}
+
+.forgot-password-form p {
+  color: white;
+  font-size: 20px;
+  margin-bottom: 25px;
+  font-weight: bold;
+}
+
+.forgot-password-form form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.forgot-password-form label {
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.forgot-password-form input[type="email"],
+.forgot-password-form input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.forgot-password-form input[type="submit"] {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-family: "Nunito", Arial, sans-serif;
+  font-weight: bold;
+  font-size: 19px;
+  border: 2px solid white;
+}
+
+.forgot-password-form input[type="submit"]:hover {
+  background-color: red;
+}

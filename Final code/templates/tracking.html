@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Fitness Tracker</title>
+    <link rel="stylesheet" href="static/trackstyle.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    <nav>
+      <div class="menu-toggle"></div>
+      <div class="profile">
+        <div class="user">
+          <h3>{{user ['username']}}</h3>
+          <p>{{user ['email']}}</p>
+        </div>
+        <div class="img-box">
+          <img src="static/images/blank-pro.jpg" alt="some user image" />
+        </div>
+      </div>
+      <div class="menu">
+        <ul>
+          <li><a href="/">&nbsp;Home</a></li>
+          <li><a href="/profile">&nbsp;Profile</a></li>
+          <li>
+            <a href="#" onclick="showPopupMessage(); return false;"
+              >&nbsp;How to use</a
+            >
+          </li>
+          <li><a href="/logout">&nbsp;Sign Out</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div id="popup-message" class="popup-message" style="display: none">
+      <div class="popup-message-content">
+        <span class="close-button" onclick="hidePopupMessage()">&times;</span>
+        <p>
+          Enter the time in the box below and press 'Enter' to see the
+          calculation.
+        </p>
+        <p>
+          <strong style="color: red">Warning:</strong
+          ><em
+            >The data collect is limited to
+            <strong id="time-limit">{{ time_limit }}</strong> only. Please enter
+            the time within that range.</em
+          >
+        </p>
+      </div>
+    </div>
+
+    <div class="container">
+      <h1>Fitness Tracker</h1>
+      <div class="main-content">
+        <div class="history-container">
+          <h2>Enter time</h2>
+          <div class="history-item">
+            <form
+              action="/calculate"
+              method="post"
+              onsubmit="return validateForm()"
+            >
+              <input
+                type="number"
+                id="hour"
+                name="hour"
+                placeholder="Hour(s)"
+                required
+              /><br />
+              <input
+                type="number"
+                id="minute"
+                name="minute"
+                placeholder="Minute(s)"
+                required
+              /><br />
+              <input
+                type="number"
+                id="second"
+                name="second"
+                placeholder="Second(s)"
+                required
+              /><br /><br />
+
+              <br /><br />
+              <button type="submit" class="btn">Enter</button>
+            </form>
+            <br />
+            <div class="input">
+              <h2>Your time:</h2>
+              {% for i in history %}
+              <p>{{i.Hour}} Hour ,{{i.Minute}} Minute ,{{i.Second}} Second</p>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div class="metrics-container">
+          <div class="metric">
+            <h2>Pace</h2>
+            <p id="average-speed">{{pace}}</p>
+          </div>
+          <div class="metric">
+            <h2>Calories Burned</h2>
+            <p id="calories-burned">{{calo_per_hour}}</p>
+          </div>
+          <div class="metric">
+            <h2>Steps Taken</h2>
+            <p id="steps-taken">{{steps}}</p>
+          </div>
+          <div class="metric">
+            <h2>Distance (km)</h2>
+            <p id="distance">{{dis}}</p>
+          </div>
+        </div>
+
+        <div id="map-container">
+          <iframe src="/map" style="width: 100%; height: 500px"></iframe>
+        </div>
+      </div>
+    </div>
+    <div id="timeLimit" data-value="{{ time_limit }}"></div>
+    <script>
+      let profile = document.querySelector(".profile");
+      let menu = document.querySelector(".menu");
+
+      profile.onclick = function () {
+        menu.classList.toggle("active");
+      };
+
+      // open popup
+      function showPopupMessage() {
+        var popupMessage = document.getElementById("popup-message");
+        popupMessage.style.display = "block";
+      }
+      // close popup
+      function hidePopupMessage() {
+        var popupMessage = document.getElementById("popup-message");
+        popupMessage.style.display = "none";
+      }
+
+      // import time_limit from app.py
+      let timeLimit = document
+        .getElementById("timeLimit")
+        .getAttribute("data-value");
+      console.log(timeLimit);
+      const timeParts = timeLimit.split(":");
+
+      // valid time input
+      function validateForm() {
+        var hour = parseInt(document.getElementById("hour").value);
+        var minute = parseInt(document.getElementById("minute").value);
+        var second = parseInt(document.getElementById("second").value);
+
+        let maxhours = parseInt(timeParts[0]);
+        let maxminutes = parseInt(timeParts[1]);
+        let maxseconds = parseInt(timeParts[2]);
+
+        let totalSecondsInput = hour * 3600 + minute * 60 + second;
+        let totalSecondsLimit = maxhours * 3600 + maxminutes * 60 + maxseconds;
+
+        if (totalSecondsInput > totalSecondsLimit) {
+          alert(`Total time must not exceed ${timeLimit}.`);
+          return false;
+        }
+
+        return true;
+      }
+    </script>
+  </body>
+</html>

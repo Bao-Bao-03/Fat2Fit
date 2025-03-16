@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="static/landstyles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Landing</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="content">
+        <header class="header">
+          <div class="logo">
+            <img
+              src="https://mobirise.com/extensions/resultm5/affiliate-marketing/assets/images/logo.png"
+              alt="Logo"
+            />
+          </div>
+          <nav class="navigation">
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/#footerdiv">About</a></li>
+              <li><a href="/#contactdiv">Contact us</a></li>
+            </ul>
+          </nav>
+        </header>
+
+        <section class="main-content">
+          <h1>Welcome to Fat2Fit</h1>
+          <p>
+            Transform your fitness journey with Fat2Fit, the ultimate fitness
+            tracking app designed to help you achieve your health and wellness
+            goals. Whether you're looking to shed a few pounds, build muscle, or
+            simply lead a healthier lifestyle, Fat2Fit provides the tools,
+            insights, and motivation you need to succeed.
+          </p>
+          <a href="#" class="button">Start Now</a>
+        </section>
+
+        <footer>
+          <p>&copy; 2024 Fat2Fit Website. All rights reserved.</p>
+        </footer>
+      </div>
+    </div>
+    <div id="popup-form" class="popup-form">
+      <div class="popup-form-content">
+        <span class="close-button">&times;</span>
+        <h2>Enter</h2>
+        <form action="/stat" method="post">
+          <label for="gender">Gender:</label>
+          <select id="gender" name="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+          <br />
+          <label for="age">Age:</label>
+          <input type="number" id="age" name="age" required />
+          <br />
+          <label for="weight">Weight (kg):</label>
+          <input type="number" id="weight" step="0.01" name="weight" required />
+          <br />
+          <label for="height">Height (cm):</label>
+          <input type="number" id="height" step="0.01" name="height" required />
+          <br />
+          <button type="form">Submit</button>
+        </form>
+      </div>
+    </div>
+  </body>
+
+  <script>
+    var popupForm = document.getElementById("popup-form");
+    var startButton = document.querySelector(".main-content a.button");
+    var closeButton = document.querySelector(".close-button");
+    var form = document.querySelector("#popup-form form");
+    var ageInput = document.getElementById("age");
+    var weightInput = document.getElementById("weight");
+    var heightInput = document.getElementById("height");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      if (ageInput.value < 13 || ageInput.value > 99) {
+        alert("Age must be between 13 and 99.");
+        return;
+      }
+      if (weightInput.value < 40 || weightInput.value > 300) {
+        alert("Weight must be between 40 and 300 kg.");
+        return;
+      }
+      if (heightInput.value < 100 || heightInput.value > 250) {
+        alert("Height must be between 100 and 250 cm.");
+        return;
+      }
+      form.submit();
+    });
+
+    startButton.addEventListener("click", function () {
+      popupForm.style.display = "block";
+    });
+
+    closeButton.addEventListener("click", function () {
+      popupForm.style.display = "none";
+    });
+
+    window.addEventListener("click", function (event) {
+      if (event.target == popupForm) {
+        popupForm.style.display = "none";
+      }
+    });
+  </script>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>User Database</title>
+  </head>
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+    }
+    th {
+      background-color: #04aa6d;
+      color: white;
+    }
+  </style>
+  <body>
+    <h1>User Database</h1>
+    <table>
+      <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Gender</th>
+        <th>Age</th>
+        <th>Weight</th>
+        <th>Height</th>
+      </tr>
+      {% for user in users %}
+      <tr>
+        <td>{{ user['id'] }}</td>
+        <td>{{ user['email'] }}</td>
+        <td>{{ user['username'] }}</td>
+        <td>{{ user['password'] }}</td>
+        <td>{{ user['gender'] }}</td>
+        <td>{{ user['age'] }}</td>
+        <td>{{ user['weight'] }}</td>
+        <td>{{ user['height'] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
